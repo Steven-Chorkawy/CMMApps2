@@ -1,0 +1,28 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "new-member-form-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/newMemberForm/NewMemberFormWebPart.js",
+          "manifest": "./src/webparts/newMemberForm/NewMemberFormWebPart.manifest.json"
+        }
+      ]
+    },
+    "add-member-command-set-command-set": {
+      "components": [
+        {
+          "entrypoint": "./lib/extensions/addMemberCommandSet/AddMemberCommandSetCommandSet.js",
+          "manifest": "./src/extensions/addMemberCommandSet/AddMemberCommandSetCommandSet.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "NewMemberFormWebPartStrings": "lib/webparts/newMemberForm/loc/{locale}.js",
+    "ControlStrings": "node_modules/@pnp/spfx-controls-react/lib/loc/{locale}.js",
+    "AddMemberCommandSetCommandSetStrings": "lib/extensions/addMemberCommandSet/loc/{locale}.js"
+  }
+}

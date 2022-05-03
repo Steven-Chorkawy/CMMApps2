@@ -1,0 +1,17 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "plusBeta": false,
+    "isCreatingSolution": false,
+    "version": "1.14.0",
+    "libraryName": "cmm-app",
+    "libraryId": "5ad75e39-18d4-4790-b63a-f93f8a45216d",
+    "environment": "spo",
+    "packageManager": "npm",
+    "solutionName": "CMMApp",
+    "solutionShortDescription": "CMMApp description",
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "componentType": "extension",
+    "extensionType": "ListViewCommandSet"
+  }
+}
