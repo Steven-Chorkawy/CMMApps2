@@ -5,7 +5,7 @@
   "initialPage": "https://localhost:5432/_layouts/workbench.aspx",
   "serveConfigurations": {
     "default": {
-      "pageUrl": "https://contoso.sharepoint.com/sites/mySite/SitePages/myPage.aspx",
+      "pageUrl": "https://claringtonnetdev.sharepoint.com/sites/CMM/CommitteeA",
       "customActions": {
         "1947b497-a68a-4b55-b37b-5e7784cc4be2": {
           "location": "ClientSideExtension.ListViewCommandSet.CommandBar",
@@ -17,9 +17,9 @@
       }
     },
     "addMemberCommandSet": {
-      "pageUrl": "https://contoso.sharepoint.com/sites/mySite/SitePages/myPage.aspx",
+      "pageUrl": "https://claringtonnetdev.sharepoint.com/sites/CMM/Lists/CommitteeMemberHistory",
       "customActions": {
-        "1947b497-a68a-4b55-b37b-5e7784cc4be2": {
+        "f406a3c9-a906-4836-8969-85cd8a6f6307": {
           "location": "ClientSideExtension.ListViewCommandSet.CommandBar",
           "properties": {
             "sampleTextOne": "One item is selected in the list",
