@@ -35,7 +35,7 @@ export default class AddMemberSidePanel extends React.Component<IAddMemberSidePa
             >
                 <div ref={e => wrapper = e}>
                     <Dropdown
-                        label=".....Add New or Existing Member"
+                        label="Add New or Existing Member"
                         options={[{ key: "Add New Member", text: "Add New Member" }, { key: "Add Existing Member", text: "Add Existing Member" }]}
                         onChange={(event, options) => {
                             console.log(options);
