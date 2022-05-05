@@ -27,6 +27,17 @@
           }
         }
       }
+    },
+    "committeeMemberLookUp": {
+      "pageUrl": "https://contoso.sharepoint.com/sites/mySite/SitePages/myPage.aspx",
+      "fieldCustomizers": {
+        "InternalFieldName": {
+          "id": "6e298eea-de09-4452-9558-9056d6647334",
+          "properties": {
+            "sampleText": "Value"
+          }
+        }
+      }
     }
   }
 }
