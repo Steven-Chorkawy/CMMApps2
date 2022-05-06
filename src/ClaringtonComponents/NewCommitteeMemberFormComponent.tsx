@@ -126,23 +126,18 @@ export class NewCommitteeMemberFormItem extends React.Component<any, INewCommitt
                         this.setState({
                             calculatedEndDate: calcEndDate
                         });
-
                         this.props.formRenderProps.onChange(`${this.props.listViewContext.parentField}[${this.props.dataItem[FORM_DATA_INDEX]}]._EndDate`, { value: calcEndDate });
                     }}
                     disabled={!this.state.committeeFileItem}
                     required={true}
                     validator={value => value ? "" : "Please Select a Stat Date."}
                 />
-                {
-                    this.state.calculatedEndDate &&
-                    <Field
-                        name={`${this.props.listViewContext.parentField}[${this.props.dataItem[FORM_DATA_INDEX]}]._EndDate`}
-                        label={'Term End Date'}
-                        formatDate={OnFormatDate}
-                        component={DatePicker}
-                        disabled={true}
-                    />
-                }
+                <Field
+                    name={`${this.props.listViewContext.parentField}[${this.props.dataItem[FORM_DATA_INDEX]}]._EndDate`}
+                    label={'Term End Date'}
+                    formatDate={OnFormatDate}
+                    component={DatePicker}
+                />
                 {
                     // MS is working on allowing users to select multiple files from a library. https://github.com/pnp/sp-dev-fx-controls-react/pull/1047                
                 }
