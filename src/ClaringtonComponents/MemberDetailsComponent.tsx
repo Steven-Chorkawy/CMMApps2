@@ -40,6 +40,7 @@ export interface ICommitteeMemberTermHistoryProps {
 export interface ICommitteeMemberTermHistoryState {
     allTermHistories: any[];
     termHistories: any[];
+    totalYearsServed?: number;
 }
 //#endregion
 
@@ -137,7 +138,8 @@ export class CommitteeMemberTermHistory extends React.Component<ICommitteeMember
                     // to get a value that is either negative, positive, or zero.
                     let bb: any = new Date(b.StartDate), aa: any = new Date(b.StartDate);
                     return bb - aa;
-                }).findIndex((t) => (t.CommitteeName === value.CommitteeName)))
+                }).findIndex((t) => (t.CommitteeName === value.CommitteeName))),
+                totalYearsServed: CalculateTotalYearsServed(values)
             });
         });
     }
@@ -146,10 +148,10 @@ export class CommitteeMemberTermHistory extends React.Component<ICommitteeMember
         return this.state.termHistories ?
             <div>
                 {
-                    this.state.allTermHistories &&
+                    this.state.allTermHistories && this.state.totalYearsServed &&
                     <div>
                         <div>
-                            <Text variant="xLarge">{CalculateTotalYearsServed(this.state.allTermHistories)} Years Served.</Text>
+                            <Text variant="xLarge">{this.state.totalYearsServed} Years Served.</Text>
                         </div>
                         <div>
                             <Text variant="small">{this.state.allTermHistories.length} Terms on {this.state.termHistories.length} Committees</Text>
