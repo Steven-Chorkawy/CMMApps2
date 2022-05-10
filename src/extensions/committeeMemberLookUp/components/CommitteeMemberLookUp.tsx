@@ -30,8 +30,6 @@ export default class CommitteeMemberLookUp extends React.Component<any, ICommitt
 
   @override
   public render(): React.ReactElement<{}> {
-    console.log(this.props);
-
     return (
       <div>
         {
