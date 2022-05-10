@@ -6,7 +6,6 @@ import { NewCommitteeMemberFormComponent } from './NewCommitteeMemberFormCompone
 import { CreateNewCommitteeMember, GetListOfActiveCommittees } from '../ClaringtonHelperMethods/MyHelperMethods';
 import { WebPartContext } from '@microsoft/sp-webpart-base';
 
-
 export interface IAddCommitteeMemberFormState {
   activeCommittees: [];
 }
@@ -15,7 +14,6 @@ export interface IAddCommitteeMemberFormProps {
   description: string;
   context: WebPartContext;
 }
-
 
 export default class AddCommitteeMemberForm extends React.Component<IAddCommitteeMemberFormProps, IAddCommitteeMemberFormState> {
 
@@ -30,11 +28,15 @@ export default class AddCommitteeMemberForm extends React.Component<IAddCommitte
     });
   }
 
-
   private _onSubmit = async (values) => {
     if (values.Committees && values.Member) {
       for (let committeeIndex = 0; committeeIndex < values.Committees.length; committeeIndex++) {
-        await CreateNewCommitteeMember(values.Member.ID, values.Committees[committeeIndex]);
+        await CreateNewCommitteeMember(values.Member.ID, values.Committees[committeeIndex])
+          .catch(reason => {
+            debugger;
+            alert('ERROR!');
+            console.log(reason);
+          });
       }
 
       alert('Done!');
@@ -42,7 +44,6 @@ export default class AddCommitteeMemberForm extends React.Component<IAddCommitte
   }
 
   public render(): React.ReactElement<IAddCommitteeMemberFormProps> {
-
     return (<div>
       <Form
         onSubmit={this._onSubmit}
