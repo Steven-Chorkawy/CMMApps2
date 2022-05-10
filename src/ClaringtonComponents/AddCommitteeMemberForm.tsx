@@ -64,6 +64,7 @@ export default class AddCommitteeMemberForm extends React.Component<IAddCommitte
               label={'Select Member'}
               require={true}
               component={SelectMember}
+              context={this.props.context}
             />
             {
               this.state.activeCommittees.length > 0 &&
