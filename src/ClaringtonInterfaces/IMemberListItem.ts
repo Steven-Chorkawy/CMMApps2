@@ -6,7 +6,7 @@ export default interface IMemberListItem {
     MiddleName?: string;
     LastName: string;       // ! Required.
     DisplayName?: string;
-    Salutation?: string;
+    // Salutation?: string;
 
     EMail?: string;
     Email2?: string;
@@ -15,7 +15,7 @@ export default interface IMemberListItem {
     HomePhone?: string;
 
     WorkAddress?: string;
-    Birthday: string;       // This is a Date and Time in SharePoint. 
+    // Birthday: string;       // This is a Date and Time in SharePoint. 
     WorkCity?: string;
     WorkCountry?: string;   // Default to Canada in SharePoint.
     PostalCode?: string;
