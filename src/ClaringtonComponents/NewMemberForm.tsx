@@ -112,11 +112,11 @@ export default class NewMemberForm extends React.Component<INewMemberFormProps, 
           <FormElement>
             <h2>Add New Member</h2>
             <div style={{ padding: '10px', marginBottom: '10px', boxShadow: reactTheme.effects.elevation16 }}>
-              <Field name={'Member.Salutation'} label={'Salutation'} component={TextField} />
+              {/* <Field name={'Member.Salutation'} label={'Salutation'} component={TextField} /> */}
               <Field name={'Member.FirstName'} label={'First Name'} required={true} component={TextField} />
               <Field name={'Member.MiddleName'} label={'Middle Name'} component={TextField} />
               <Field name={'Member.LastName'} label={'Last Name'} required={true} component={TextField} />
-              <Field name={'Member.Birthday'} label={'Date of Birth'} component={DatePicker} formatDate={OnFormatDate} />
+              {/* <Field name={'Member.Birthday'} label={'Date of Birth'} component={DatePicker} formatDate={OnFormatDate} /> */}
 
               <Field name={'Member.EMail'} label={'Email'} validator={emailValidator} component={EmailInput} />
               <Field name={'Member.Email2'} label={'Email 2'} validator={emailValidator} component={EmailInput} />
