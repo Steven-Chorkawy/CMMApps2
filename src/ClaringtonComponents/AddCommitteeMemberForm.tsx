@@ -33,7 +33,6 @@ export default class AddCommitteeMemberForm extends React.Component<IAddCommitte
       for (let committeeIndex = 0; committeeIndex < values.Committees.length; committeeIndex++) {
         await CreateNewCommitteeMember(values.Member.ID, values.Committees[committeeIndex])
           .catch(reason => {
-            debugger;
             alert('ERROR!');
             console.log(reason);
           });
