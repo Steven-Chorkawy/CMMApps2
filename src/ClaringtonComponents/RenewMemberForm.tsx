@@ -32,7 +32,14 @@ export default class RenewMemberForm extends React.Component<IRenewMemberFormPro
     private _onSubmit = values => {
         console.log('Renew Member Form Submit');
         console.log(values);
-        RenewCommitteeMember(values);
+        RenewCommitteeMember(values).then(value => {
+            console.log('After Renew Committee Member');
+            //TODO: Check if this method has successfully completed and display an success/error message.
+        }).catch(reason => {
+            console.log('Error after RenewCommitteeMember');
+            console.log(reason);
+            // TODO: Show an error message on the form. 
+        });
     }
 
     public render(): React.ReactElement<IRenewMemberFormProps> {
@@ -42,6 +49,7 @@ export default class RenewMemberForm extends React.Component<IRenewMemberFormPro
                 initialValues={{
                     Committees: [{
                         CommitteeName: this.props?.context?.pageContext.list.title ? this.props.context?.pageContext.list.title : undefined,
+                        DocumentSetId: this.props.documentSetID,
                         Position: undefined,
                         StartDate: undefined,
                         _EndDate: undefined,
