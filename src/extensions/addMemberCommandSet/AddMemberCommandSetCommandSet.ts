@@ -81,7 +81,8 @@ export default class AddMemberCommandSetCommandSet extends BaseListViewCommandSe
         const renewMemberElement: React.ReactElement<any> = React.createElement(RenewMemberSidePanel, {
           context: this.context,
           isOpen: true,
-          committeeMemberID: event.selectedRows[0].getValueByName('SPFX_CommitteeMemberDisplayName')[0].lookupId
+          committeeMemberID: event.selectedRows[0].getValueByName('SPFX_CommitteeMemberDisplayName')[0].lookupId,
+          documentSetID: Number(event.selectedRows[0].getValueByName('ID'))
         });
         ReactDOM.render(renewMemberElement, div);
         break;

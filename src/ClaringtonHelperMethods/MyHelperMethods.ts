@@ -219,6 +219,19 @@ export const CreateCommitteeMemberHistoryItem = async (committeeMemberHistoryIte
 export const RenewCommitteeMember = async (values: any): Promise<any> => {
     console.log('RenewCommitteeMember');
     console.log(values);
+    let committeeInput = values.Committees[0];
+
+    // Step 1: Update the Committee Member Document Set. 
+    await sp.web.lists.getByTitle(committeeInput.CommitteeName).items.getById(committeeInput.DocumentSetId).update({
+        Position: committeeInput.Position,
+        StartDate: committeeInput.StartDate,
+        OData__EndDate: committeeInput._EndDate,
+        OData__Status: committeeInput._Status
+    });
+    // Step 2: Create a new Committe Member History Item. 
+
+    // Step 3: Update Committee Member Document Sets 'Current Term' field with the new Committee Member History Item.
+
     return;
 };
 //#endregion
