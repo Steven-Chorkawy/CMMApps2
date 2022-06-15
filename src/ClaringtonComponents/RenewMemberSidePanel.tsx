@@ -11,6 +11,7 @@ export interface IRenewMemberSidePanelProps {
     panelType?: PanelType;
     context: any;
     committeeMemberID: number;
+    documentSetID: number;
 }
 
 export default class RenewMemberSidePanel extends React.Component<IRenewMemberSidePanelProps, any> {
