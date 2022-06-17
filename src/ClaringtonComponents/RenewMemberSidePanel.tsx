@@ -12,6 +12,7 @@ export interface IRenewMemberSidePanelProps {
     context: any;
     committeeMemberID: number;
     documentSetID: number;
+    closePanel: Function;
 }
 
 export default class RenewMemberSidePanel extends React.Component<IRenewMemberSidePanelProps, any> {
@@ -35,7 +36,7 @@ export default class RenewMemberSidePanel extends React.Component<IRenewMemberSi
                 customWidth={'800px'}
             >
                 <div ref={e => wrapper = e}>
-                    <RenewMemberForm {...this.props} />
+                    <RenewMemberForm {...this.props} closePanel={() => this.setState({ isOpen: false })} />
                 </div>
             </Panel >
         );

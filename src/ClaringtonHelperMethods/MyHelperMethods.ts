@@ -232,7 +232,7 @@ export const RenewCommitteeMember = async (values: any): Promise<any> => {
 
     // Step 3: Update Committee Member Document Sets 'Current Term' field with the new Committee Member History Item.
 
-    return;
+    return true;
 };
 //#endregion
 

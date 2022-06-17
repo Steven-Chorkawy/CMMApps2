@@ -35,6 +35,9 @@ export default class RenewMemberForm extends React.Component<IRenewMemberFormPro
         RenewCommitteeMember(values).then(value => {
             console.log('After Renew Committee Member');
             //TODO: Check if this method has successfully completed and display an success/error message.
+
+            alert('Form will now close...');
+            this.props.closePanel();
         }).catch(reason => {
             console.log('Error after RenewCommitteeMember');
             console.log(reason);
