@@ -43,6 +43,14 @@ export const FormatDocumentSetPath = async (libraryTitle: string, title: string)
     return `${library.RootFolder.ServerRelativeUrl}/${title}`;
 };
 
+/**
+ * Format members Full Name/ Title.
+ * @param firstName Members First Name.
+ * @param lastName Members Last Name.
+ * @returns "lastName, firstName"
+ */
+export const FormatMemberTitle = (firstName: string, lastName: string): string => { return `${lastName}, ${firstName}`; };
+
 export const CheckForExistingDocumentSetByServerRelativePath = async (serverRelativePath: string): Promise<boolean> => {
     return await (await sp.web.getFolderByServerRelativePath(serverRelativePath).select('Exists').get()).Exists;
 };
@@ -116,11 +124,12 @@ export const CalculateTotalYearsServed = (committeeTerms: ICommitteeMemberHistor
 
     return totalYears;
 };
+
 //#endregion
 
 //#region Create
 export const CreateNewMember = async (member: IMemberListItem): Promise<IItemAddResult> => {
-    member.Title = `${member.LastName}, ${member.FirstName}`;
+    member.Title = FormatMemberTitle(member.FirstName, member.LastName);
     // add an item to the list
     let iar = await sp.web.lists.getByTitle(MyLists.Members).items.add(member);
     return iar;
@@ -173,7 +182,7 @@ export const CreateNewCommitteeMember = async (memberId: number, committee: any)
         LastName: member.LastName,
         SPFX_CommitteeMemberDisplayNameId: memberId,
         MemberID: memberId,
-        Title: `${member.FirstName} ${member.LastName}`
+        Title: FormatMemberTitle(member.firstName, member.lastName)
     });
 };
 
@@ -220,6 +229,7 @@ export const RenewCommitteeMember = async (values: any): Promise<any> => {
     console.log('RenewCommitteeMember');
     console.log(values);
     let committeeInput = values.Committees[0];
+    let memberInput = values.Member;
 
     // Step 1: Update the Committee Member Document Set. 
     await sp.web.lists.getByTitle(committeeInput.CommitteeName).items.getById(committeeInput.DocumentSetId).update({
@@ -228,7 +238,18 @@ export const RenewCommitteeMember = async (values: any): Promise<any> => {
         OData__EndDate: committeeInput._EndDate,
         OData__Status: committeeInput._Status
     });
+
     // Step 2: Create a new Committe Member History Item. 
+    await CreateCommitteeMemberHistoryItem({
+        CommitteeName: committeeInput.CommitteeName,
+        OData__EndDate: committeeInput._EndDate,
+        StartDate: committeeInput.StartDate,
+        FirstName: memberInput.FirstName,
+        LastName: memberInput.LastName,
+        SPFX_CommitteeMemberDisplayNameId: 0,
+        MemberID: 0,
+        Title: FormatMemberTitle(memberInput.firstName, memberInput.lastName)
+    });
 
     // Step 3: Update Committee Member Document Sets 'Current Term' field with the new Committee Member History Item.
 
