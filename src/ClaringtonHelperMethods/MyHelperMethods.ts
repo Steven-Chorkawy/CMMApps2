@@ -72,7 +72,7 @@ export const CalculateTermEndDate = (startDate: Date, termLength: number): Date 
 export const CalculateMemberInfoRetention = async (memberId: number): Promise<{ date, committee }> => {
     let output: Date = undefined;
     let committeeName: string = undefined;
-    const RETENTION_PERIOD = 5; // Retention is 5 years + last Term End Date.
+    const RETENTION_PERIOD = 5; // ! Retention is 5 years + last Term End Date.
     let memberHistory = await sp.web.lists.getByTitle(MyLists.CommitteeMemberHistory).items
         .filter(`SPFX_CommitteeMemberDisplayNameId eq ${memberId}`)
         .orderBy('OData__EndDate', false).get();
@@ -124,7 +124,6 @@ export const CalculateTotalYearsServed = (committeeTerms: ICommitteeMemberHistor
 
     return totalYears;
 };
-
 //#endregion
 
 //#region Create
@@ -219,6 +218,7 @@ export const CreateCommitteeMemberHistoryItem = async (committeeMemberHistoryIte
 
     let committeeMemberContactInfoRetention = await CalculateMemberInfoRetention(committeeMemberHistoryItem.SPFX_CommitteeMemberDisplayNameId);
 
+    // Update the Members personal contact info with the new retention date.
     await sp.web.lists.getByTitle(MyLists.Members).items.getById(committeeMemberHistoryItem.SPFX_CommitteeMemberDisplayNameId).update({
         RetentionDate: committeeMemberContactInfoRetention.date,
         RetentionDateCommittee: committeeMemberContactInfoRetention.committee
@@ -239,19 +239,21 @@ export const RenewCommitteeMember = async (values: any): Promise<any> => {
         OData__Status: committeeInput._Status
     });
 
-    // Step 2: Create a new Committe Member History Item. 
+    // Step 2: Create a new Committe Member History Item.
+    debugger;
     await CreateCommitteeMemberHistoryItem({
         CommitteeName: committeeInput.CommitteeName,
         OData__EndDate: committeeInput._EndDate,
         StartDate: committeeInput.StartDate,
         FirstName: memberInput.FirstName,
         LastName: memberInput.LastName,
-        SPFX_CommitteeMemberDisplayNameId: 0,
-        MemberID: 0,
+        SPFX_CommitteeMemberDisplayNameId: memberInput.ID,
+        MemberID: memberInput.ID,
         Title: FormatMemberTitle(memberInput.firstName, memberInput.lastName)
     });
 
     // Step 3: Update Committee Member Document Sets 'Current Term' field with the new Committee Member History Item.
+    
 
     return true;
 };
@@ -295,7 +297,6 @@ export const GetListOfActiveCommittees = async (): Promise<any> => {
     // TODO: Remove hard coded content type id.
     return await sp.web.lists.getByTitle(MyLists.CommitteeFiles).items.filter("OData__Status eq 'Active' and ContentTypeId eq '0x0120D52000BD403A8C219D9A40B835B291EFC822540092D9BC58A61C004084D3AAF8347D14E3'").getAll();
 };
-
 
 export const GetLibraryContentTypes = async (libraryTitle: string): Promise<string> => {
     let library = await sp.web.lists.getByTitle(libraryTitle);
