@@ -213,8 +213,8 @@ export const CreateDocumentSet = async (input): Promise<IItemUpdateResult> => {
     });
 };
 
-export const CreateCommitteeMemberHistoryItem = async (committeeMemberHistoryItem: ICommitteeMemberHistory_NewListItem) => {
-    await sp.web.lists.getByTitle(MyLists.CommitteeMemberHistory).items.add({ ...committeeMemberHistoryItem });
+export const CreateCommitteeMemberHistoryItem = async (committeeMemberHistoryItem: ICommitteeMemberHistory_NewListItem, callback?: Function) => {
+    let newCommitteeMemberHistoryItem = await sp.web.lists.getByTitle(MyLists.CommitteeMemberHistory).items.add({ ...committeeMemberHistoryItem });
 
     let committeeMemberContactInfoRetention = await CalculateMemberInfoRetention(committeeMemberHistoryItem.SPFX_CommitteeMemberDisplayNameId);
 
@@ -223,6 +223,10 @@ export const CreateCommitteeMemberHistoryItem = async (committeeMemberHistoryIte
         RetentionDate: committeeMemberContactInfoRetention.date,
         RetentionDateCommittee: committeeMemberContactInfoRetention.committee
     });
+
+    if (callback) {
+        callback(newCommitteeMemberHistoryItem.data);
+    }
 };
 
 export const RenewCommitteeMember = async (values: any): Promise<any> => {
@@ -240,17 +244,23 @@ export const RenewCommitteeMember = async (values: any): Promise<any> => {
     });
 
     // Step 2: Create a new Committe Member History Item.
-    debugger;
-    await CreateCommitteeMemberHistoryItem({
-        CommitteeName: committeeInput.CommitteeName,
-        OData__EndDate: committeeInput._EndDate,
-        StartDate: committeeInput.StartDate,
-        FirstName: memberInput.FirstName,
-        LastName: memberInput.LastName,
-        SPFX_CommitteeMemberDisplayNameId: memberInput.ID,
-        MemberID: memberInput.ID,
-        Title: FormatMemberTitle(memberInput.firstName, memberInput.lastName)
-    });
+    await CreateCommitteeMemberHistoryItem(
+        {
+            CommitteeName: committeeInput.CommitteeName,
+            OData__EndDate: committeeInput._EndDate,
+            StartDate: committeeInput.StartDate,
+            FirstName: memberInput.FirstName,
+            LastName: memberInput.LastName,
+            SPFX_CommitteeMemberDisplayNameId: memberInput.ID,
+            MemberID: memberInput.ID,
+            Title: FormatMemberTitle(memberInput.FirstName, memberInput.LastName)
+        },
+        (committeeMemberHistoryItem) => {
+            debugger;
+            console.log('CreateCommitteeMemberHistoryItem Callback...');
+            console.log(committeeMemberHistoryItem);
+        }
+    );
 
     // Step 3: Update Committee Member Document Sets 'Current Term' field with the new Committee Member History Item.
     
