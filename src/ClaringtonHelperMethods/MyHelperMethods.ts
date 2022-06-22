@@ -230,8 +230,6 @@ export const CreateCommitteeMemberHistoryItem = async (committeeMemberHistoryIte
 };
 
 export const RenewCommitteeMember = async (values: any): Promise<any> => {
-    console.log('RenewCommitteeMember');
-    console.log(values);
     let committeeInput = values.Committees[0];
     let memberInput = values.Member;
 
