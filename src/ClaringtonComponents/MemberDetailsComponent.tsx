@@ -135,6 +135,21 @@ export class CommitteeMemberTermHistory extends React.Component<ICommitteeMember
              * 2. Select the first item in the array after sorting.  This first item will be displayed in the Committee History display.
              */
             debugger;
+
+
+            // Group the committee terms by the Committee Name.
+            let termsGroupedByCommitteeName = values.reduce((previousValue, currentValue, currentIndex) => {
+                previousValue[currentValue.CommitteeName] = previousValue[currentValue.CommitteeName] || [];
+                previousValue[currentValue.CommitteeName].push(currentValue);
+                return previousValue;
+            }, Object.create(null));
+
+            debugger;
+            // Sort through each committee name then order the terms by start date desc.
+            termsGroupedByCommitteeName.each(g => {
+                
+            })
+
             let termHistories = values.filter(
                 (value, index, self) => index === self.sort((a, b) => {
                     // Turn your strings into dates, and then subtract them
@@ -143,6 +158,7 @@ export class CommitteeMemberTermHistory extends React.Component<ICommitteeMember
                     return bb - aa;
                 }).findIndex((t) => (t.CommitteeName === value.CommitteeName))
             );
+
             debugger;
             this.setState({
                 allTermHistories: values,
