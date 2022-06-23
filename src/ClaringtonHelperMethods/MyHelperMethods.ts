@@ -252,17 +252,8 @@ export const RenewCommitteeMember = async (values: any): Promise<any> => {
             SPFX_CommitteeMemberDisplayNameId: memberInput.ID,
             MemberID: memberInput.ID,
             Title: FormatMemberTitle(memberInput.FirstName, memberInput.LastName)
-        },
-        (committeeMemberHistoryItem) => {
-            debugger;
-            console.log('CreateCommitteeMemberHistoryItem Callback...');
-            console.log(committeeMemberHistoryItem);
         }
     );
-
-    // Step 3: Update Committee Member Document Sets 'Current Term' field with the new Committee Member History Item.
-    
-
     return true;
 };
 //#endregion
