@@ -116,7 +116,6 @@ export class CommitteeMemberBreadCrumb extends React.Component<ICommitteeMemberB
                         <span title={`Start Date`}>{new Date(this.props.committeeTerm.StartDate).toLocaleDateString()}</span> - <span title={`End Date`}>{new Date(this.props.committeeTerm.OData__EndDate).toLocaleDateString()}</span>
                     </Text>
                 </div>
-                {/* <ActivityItem {...activityItem} key={activityItem.key} className={classNames.exampleRoot} /> */}
             </div>
         </div >;
     }
@@ -131,14 +130,23 @@ export class CommitteeMemberTermHistory extends React.Component<ICommitteeMember
         };
 
         GetMembersTermHistory(this.props.memberID).then(values => {
-            this.setState({
-                allTermHistories: values,
-                termHistories: values.filter((value, index, self) => index === self.sort((a, b) => {
+            /**
+             * 1. Sort all the users committee history items by Start Date, newest to oldest.
+             * 2. Select the first item in the array after sorting.  This first item will be displayed in the Committee History display.
+             */
+            debugger;
+            let termHistories = values.filter(
+                (value, index, self) => index === self.sort((a, b) => {
                     // Turn your strings into dates, and then subtract them
                     // to get a value that is either negative, positive, or zero.
-                    let bb: any = new Date(b.StartDate), aa: any = new Date(b.StartDate);
+                    let bb: any = new Date(b.StartDate), aa: any = new Date(a.StartDate);
                     return bb - aa;
-                }).findIndex((t) => (t.CommitteeName === value.CommitteeName))),
+                }).findIndex((t) => (t.CommitteeName === value.CommitteeName))
+            );
+            debugger;
+            this.setState({
+                allTermHistories: values,
+                termHistories: termHistories,
                 totalYearsServed: CalculateTotalYearsServed(values)
             });
         });
