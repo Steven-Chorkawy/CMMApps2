@@ -128,7 +128,7 @@ export default class NewMemberForm extends React.Component<INewMemberFormProps, 
               <Field name={'Member.WorkAddress'} label={'Street Address'} component={TextField} />
               <Field name={'Member.WorkCity'} label={'City'} component={TextField} />
               <Field name={'Member.PostalCode'} label={'Postal Code'} component={PostalCodeInput} onChange={e => formRenderProps.onChange(e.name, e.value)} />
-              {/** !!! TODO: Get these values from SharePoint, not hard coded.  */}
+              
               <Field name={'Member.Province'}
                 label={'Province'}
                 component={MyComboBox}
