@@ -89,7 +89,7 @@ export class CommitteeMemberDashboard extends React.Component<ICommitteeMemberDa
           },
           {
             title: "Committee History",
-            size: WidgetSize.Single,
+            size: WidgetSize.Double,
             body: [{
               id: 'id',
               title: 'Committee History',
@@ -99,7 +99,7 @@ export class CommitteeMemberDashboard extends React.Component<ICommitteeMemberDa
           },
           {
             title: "Card 3",
-            size: WidgetSize.Double,
+            size: WidgetSize.Single,
             link: linkExample,
           }]} />
       }
