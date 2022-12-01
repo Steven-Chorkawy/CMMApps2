@@ -148,7 +148,7 @@ export class CommitteeMemberTermHistory extends React.Component<ICommitteeMember
             // Sort through each committee name then order the terms by start date desc.
             termsGroupedByCommitteeName.each(g => {
                 
-            })
+            });
 
             let termHistories = values.filter(
                 (value, index, self) => index === self.sort((a, b) => {
