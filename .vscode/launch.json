@@ -5,7 +5,7 @@
       "name": "Hosted workbench",
       "type": "pwa-chrome",
       "request": "launch",
-      "url": "https://claringtonnetdev.sharepoint.com/sites/CMM/_layouts/workbench.aspx",
+      "url": "https://claringtonnet.sharepoint.com/sites/CMM/_layouts/workbench.aspx",
       "webRoot": "${workspaceRoot}",
       "sourceMaps": true,
       "sourceMapPathOverrides": {
